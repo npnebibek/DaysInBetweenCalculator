@@ -3,7 +3,7 @@ using DaysInBetweenCalculator.Interface;
 
 namespace DaysInBetweenCalculator.Implementaion
 {
-    public class BusinessDayCounter : IBusinessDayCounter
+    public class DaysInBetweenCalculator : IDaysInBetweenCalculator
     {
         #region public methods
         /// <summary>
