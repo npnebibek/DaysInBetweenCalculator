@@ -14,11 +14,11 @@ namespace DaysInBetweenCalculator.Implementation
         /// <returns></returns>
         public int WeekdaysBetweenTwoDates(DateTime firstDate, DateTime secondDate)
         {
-            var numberOfWeedays = 0;
+            var numberOfWeekdays = 0;
 
             if (!IsValidDateInputs(firstDate, secondDate))
             {
-                return numberOfWeedays;
+                return numberOfWeekdays;
             }
 
             //We do not include the startDate and endDate
@@ -28,12 +28,12 @@ namespace DaysInBetweenCalculator.Implementation
             {
                 if (IsWeekday(currentDate))
                 {
-                    numberOfWeedays++;
+                    numberOfWeekdays++;
                 }
                 currentDate = currentDate.AddDays(1);
             }
 
-            return numberOfWeedays;
+            return numberOfWeekdays;
         }
 
         /// <summary>
@@ -66,6 +66,7 @@ namespace DaysInBetweenCalculator.Implementation
 
             return numberOfBusinessDays;
         }
+
 
         public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, Holidays holidays)
         {

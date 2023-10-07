@@ -1,7 +1,4 @@
-﻿using DaysInBetweenCalculator.Interface;
-using DaysInBetweenCalculator.Implementation;
-
-namespace DaysInBetweenCalculator
+﻿namespace DaysInBetweenCalculator
 {
     public class Program
     {
@@ -9,8 +6,8 @@ namespace DaysInBetweenCalculator
         {
             var calculator = new Implementation.DaysInBetweenCalculator();
 
-            DateTime startDate = new(2023, 10, 1);
-            DateTime endDate = new(2023, 10, 15);
+            DateTime startDate = new(2023, 10, 5);
+            DateTime endDate = new(2023, 10, 4);
 
             int daysBetween = calculator.WeekdaysBetweenTwoDates(startDate, endDate);
 
