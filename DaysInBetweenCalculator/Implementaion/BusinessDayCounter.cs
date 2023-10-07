@@ -4,6 +4,7 @@ namespace DaysInBetweenCalculator.Implementaion
 {
     public class BusinessDayCounter : IBusinessDayCounter
     {
+        private readonly int _dayInLieu;
 
         #region public methods
         /// <summary>
@@ -43,7 +44,7 @@ namespace DaysInBetweenCalculator.Implementaion
         /// <param name="secondDate"></param>
         /// <param name="publicHolidays"></param>
         /// <returns></returns>
-        public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IEnumerable<DateTime> publicHolidays)
+        public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays)
         {
             var numberOfBusinessDays = 0;
 
@@ -57,13 +58,12 @@ namespace DaysInBetweenCalculator.Implementaion
 
             while (currentDate < secondDate)
             {
-                if (IsWeekday(currentDate))
+                if (IsWeekday(currentDate) && !IsPublicHoliday(currentDate, publicHolidays))
                 {
                     numberOfBusinessDays++;
                 }
                 currentDate = currentDate.AddDays(1);
             }
-
 
             return numberOfBusinessDays;
         }
@@ -99,9 +99,9 @@ namespace DaysInBetweenCalculator.Implementaion
             return false;
         }
 
-        private static bool IsBusinessDay(DateTime currentDate)
+        private static bool IsPublicHoliday(DateTime currentDate, IList<DateTime> publicHolidays)
         {
-            return false;
+            return publicHolidays.Any(holiday => holiday.Date == currentDate.Date);
         }
 
         #endregion
