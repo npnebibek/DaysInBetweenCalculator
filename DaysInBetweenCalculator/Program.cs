@@ -8,5 +8,6 @@ namespace DaysInBetweenCalculator
 {
     internal class Program
     {
+
     }
 }

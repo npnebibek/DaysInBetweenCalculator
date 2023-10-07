@@ -12,8 +12,16 @@ namespace DaysInBetweenCalculator.Implementaion
         /// <returns></returns>
         public int WeekdaysBetweenTwoDates(DateTime firstDate, DateTime secondDate)
         {
-            ValidateInputDates(firstDate, secondDate);
-            return 0;
+            var numberOfDaysInBetween = ValidateInputDates(firstDate, secondDate);
+
+            if (numberOfDaysInBetween == 0)
+            {
+                return numberOfDaysInBetween;
+            }
+
+
+
+            return numberOfDaysInBetween;
         }
 
         /// <summary>
@@ -25,8 +33,16 @@ namespace DaysInBetweenCalculator.Implementaion
         /// <returns></returns>
         public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IEnumerable<DateTime> publicHolidays)
         {
-            ValidateInputDates(firstDate, secondDate);
-            return 0;
+            var numberOfDaysInBetween = ValidateInputDates(firstDate, secondDate);
+
+            if (numberOfDaysInBetween == 0)
+            {
+                return numberOfDaysInBetween;
+            }
+
+
+
+            return numberOfDaysInBetween;
         }
 
         /// <summary>
@@ -37,12 +53,7 @@ namespace DaysInBetweenCalculator.Implementaion
         /// <returns></returns>
         private static int ValidateInputDates(DateTime firstDate, DateTime secondDate)
         {
-
-            if (DateTime.Compare(firstDate, secondDate) > 0)
-            {
-                return 0;
-            }
-            else if (DateTime.Compare(firstDate, secondDate) == 0)
+            if (DateTime.Compare(firstDate, secondDate) > 0 || DateTime.Compare(firstDate, secondDate) == 0)
             {
                 return 0;
             }
