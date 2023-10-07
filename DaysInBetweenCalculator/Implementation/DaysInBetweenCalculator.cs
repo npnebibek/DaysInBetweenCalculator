@@ -39,9 +39,10 @@ namespace DaysInBetweenCalculator.Implementation
         /// <param name="secondDate"></param>
         /// <param name="holidays"></param>
         /// <returns></returns>
-        public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, Holidays holidays)
+        public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, HolidayRules holidays)
         {
-            var numberOfBusinessDays = CalculateDays(firstDate, secondDate, holidays.PublicHolidays, calculateDaysInLieu: true);
+            var publicHolidayDates = GetHolidayDatesInRange(firstDate, secondDate, holidays.PublicHolidays);
+            var numberOfBusinessDays = CalculateDays(firstDate, secondDate, publicHolidayDates, calculateDaysInLieu: holidays.CalculateDayInLieu);
             return numberOfBusinessDays;
         }
         #endregion
@@ -142,6 +143,21 @@ namespace DaysInBetweenCalculator.Implementation
             }
 
             return numberOfDays;
+        }
+
+        /// <summary>
+        /// Get a list of applicable dates in range of input dates
+        /// </summary>
+        /// <param name="firstDate"></param>
+        /// <param name="secondDate"></param>
+        /// <param name="publicHolidayDates"></param>
+        /// <returns></returns>
+        private IList<DateTime> GetHolidayDatesInRange(DateTime firstDate, 
+                                                       DateTime secondDate, 
+                                                       IList<Holiday> publicHolidayDates)
+        {
+            var datesInRange = new List<DateTime>();
+            return datesInRange;
         }
 
         #endregion

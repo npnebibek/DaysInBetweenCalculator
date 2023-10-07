@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DaysInBetweenCalculator.Helpers
+﻿namespace DaysInBetweenCalculator.Helpers
 {
-    public class Holidays
+    public class HolidayRules
     {
-        public IList<DateTime> PublicHolidays { get; set; } = new List<DateTime>();
-        public int DaysInLieu { get; set; } = 0;
+        public IList<Holiday> PublicHolidays { get; set; } = new List<Holiday>();
+        public bool CalculateDayInLieu { get; set; }
+    }
+
+    public class Holiday
+    {
+        public DateTime HolidayDate { get; set; }
+        public string? Name { get; set; }
+        public bool Recurring { get; set; }
+        public bool StateHoliday { get; set; }
+        public string? State { get; set; }
     }
 }

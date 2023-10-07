@@ -6,6 +6,6 @@ namespace DaysInBetweenCalculator.Interface
     {
         int WeekdaysBetweenTwoDates(DateTime firstDate, DateTime secondDate);
         int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays);
-        int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, Holidays holidays);
+        int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, HolidayRules holidays);
     }
 }
