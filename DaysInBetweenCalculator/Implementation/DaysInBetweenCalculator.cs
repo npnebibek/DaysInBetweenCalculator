@@ -31,7 +31,14 @@ namespace DaysInBetweenCalculator.Implementation
             return numberOfBusinessDays;
         }
 
-
+        /// <summary>
+        /// Calculate public holidays(PH) and day inlieu i.e if PH occurs on a weekend it gets transferred
+        /// to the subsequent weekday
+        /// </summary>
+        /// <param name="firstDate"></param>
+        /// <param name="secondDate"></param>
+        /// <param name="holidays"></param>
+        /// <returns></returns>
         public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, Holidays holidays)
         {
             var numberOfBusinessDays = CalculateDays(firstDate, secondDate, holidays.PublicHolidays, calculateDaysInLieu: true);
@@ -88,6 +95,15 @@ namespace DaysInBetweenCalculator.Implementation
             }
         }
 
+        /// <summary>
+        /// Calculate number of working days
+        /// Use Optional parameters calculate working days, public holidays and day in lieu
+        /// </summary>
+        /// <param name="firstDate"></param>
+        /// <param name="secondDate"></param>
+        /// <param name="publicHolidays"></param>
+        /// <param name="calculateDaysInLieu"></param>
+        /// <returns></returns>
         private static int CalculateDays(DateTime firstDate,
                                          DateTime secondDate,
                                          IList<DateTime>? publicHolidays = null,
