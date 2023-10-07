@@ -87,6 +87,9 @@ namespace DaysInBetweenCalculator.Implementation
                 currentDate = currentDate.AddDays(1);
             }
 
+            //Now subtract days in lieu if public holidays were on weekends
+            numberOfBusinessDays = numberOfBusinessDays - holidays.DaysInLieu;
+
             return numberOfBusinessDays;
         }
         #endregion
@@ -122,7 +125,7 @@ namespace DaysInBetweenCalculator.Implementation
         }
 
         /// <summary>
-        /// Check if date is ipublic holiday
+        /// Check if date is public holiday
         /// </summary>
         /// <param name="currentDate"></param>
         /// <param name="publicHolidays"></param>
