@@ -1,7 +1,7 @@
 ﻿using DaysInBetweenCalculator.Helpers;
 using DaysInBetweenCalculator.Interface;
 
-namespace DaysInBetweenCalculator.Implementaion
+namespace DaysInBetweenCalculator.Implementation
 {
     public class DaysInBetweenCalculator : IDaysInBetweenCalculator
     {
@@ -114,7 +114,7 @@ namespace DaysInBetweenCalculator.Implementaion
         /// <returns></returns>
         private static bool IsWeekday(DateTime currentDate)
         {
-            if (currentDate.DayOfWeek != DayOfWeek.Saturday || currentDate.DayOfWeek != DayOfWeek.Sunday)
+            if (currentDate.DayOfWeek != DayOfWeek.Saturday && currentDate.DayOfWeek != DayOfWeek.Sunday)
             {
                 return true;
             }
