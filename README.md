@@ -30,6 +30,28 @@ Calculates the number of business days considering public holidays and optional 
 -   `holidays`: Holiday rules specifying public holidays, recurring holiday rules, state only rules and day-in-lieu calculations.
 -   Returns the number of business days between the two dates.
 
+```csharp
+namespace DaysInBetweenCalculator.Helpers
+{
+    public class HolidayRules
+    {
+        public List<Holiday> PublicHolidays { get; set; } = new List<Holiday>();
+        public bool CalculateDayInLieu { get; set; }
+    }
+
+    public class Holiday
+    {
+        public DateTime HolidayDate { get; set; }
+        public string? Name { get; set; }
+        public bool Recurring { get; set; }
+        public bool StateHoliday { get; set; }
+        public string? State { get; set; }
+    }
+}
+```
+
+The HolidayRules class is used to configure holiday rules, taking into account public holidays and optional day-in-lieu calculations. Holiday class can further be configured or extended as per use case.
+
 ## Private Methods
 
 ### `private static bool IsValidDateInputs(DateTime firstDate, DateTime secondDate)`
