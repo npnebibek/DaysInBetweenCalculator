@@ -132,6 +132,13 @@ namespace DaysInBetweenCalculator.Implementation
             return numberOfDays;
         }
 
+        /// <summary>
+        /// Calculate number of working days and complex public holidays types
+        /// </summary>
+        /// <param name="firstDate"></param>
+        /// <param name="secondDate"></param>
+        /// <param name="publicHolidays"></param>
+        /// <returns></returns>
         private static int CalculateBusinessDays(DateTime firstDate,
                                                  DateTime secondDate,
                                                  IList<IHoliday> publicHolidays)
@@ -151,9 +158,19 @@ namespace DaysInBetweenCalculator.Implementation
                 var isWeekday = IsWeekday(currentDate);
                 var isPublicHoliday = publicHolidays.Any(ph => ph.IsPublicHoliday(currentDate));
 
-                if (isWeekday && !isPublicHoliday)
+                if (isWeekday)
                 {
-                    numberOfDays++;
+                    if (!isPublicHoliday)
+                    {
+                        numberOfDays++;
+                    }
+                }
+                else
+                {
+                    if (isPublicHoliday)
+                    {
+                        numberOfDays--;
+                    }
                 }
 
                 currentDate = currentDate.AddDays(1);
