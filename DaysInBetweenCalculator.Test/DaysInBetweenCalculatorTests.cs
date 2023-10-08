@@ -144,7 +144,7 @@ namespace DaysInBetweenCalculator.Tests
             var holidays = new HolidayRules
             {
                 PublicHolidays = new List<Holiday> { holiday1, holiday2 },
-                CalculateDayInLieu = false
+                CalculateDayInLieu = true
             };
 
             var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidays);
