@@ -2,18 +2,18 @@
 
 namespace DaysInBetweenCalculator
 {
-    public class Program
+    public static class Program
     {
         static void Main(string[] args)
         {
             var calculator = new Implementation.DaysInBetweenCalculator();
 
-            DateTime startDate = new(2023, 10, 6);
-            DateTime endDate = new(2023, 10, 14);
+            DateTime startDate = new(2023, 12, 20);
+            DateTime endDate = new(2024, 01, 02);
 
             var publicHolidays = new List<DateTime>
             {
-                new(2023, 10, 9), new(2023, 10, 10)
+                new(2023, 12, 25), new(2023, 12, 26), new(2023, 12, 31)
             };
 
             var holiday1 = new Holiday
@@ -32,9 +32,18 @@ namespace DaysInBetweenCalculator
                 Recurring = true,
             };
 
+
+            var holiday3 = new Holiday
+            {
+                HolidayDate = new(2023, 12, 31),
+                Name = "New Year's Eve",
+                StateHoliday = true,
+                Recurring = true,
+            };
+
             var holidayRules = new HolidayRules
             {
-                PublicHolidays = new List<Holiday> { holiday1, holiday2},
+                PublicHolidays = new List<Holiday> { holiday1, holiday2, holiday3},
                 CalculateDayInLieu = true
             };
 
