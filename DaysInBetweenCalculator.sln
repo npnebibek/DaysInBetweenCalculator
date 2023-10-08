@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaysInBetweenCaculator", "DaysInBetweenCalculator\DaysInBetweenCaculator.csproj", "{EFD5016A-1E17-4C42-A487-603F3517D40C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaysInBetweenCalculator.Tests", "DaysInBetweenCalculator.Test\DaysInBetweenCalculator.Tests.csproj", "{F6446B13-ED1D-4222-92CC-98BEB932E5FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaysInBetweenCalculator.Tests", "DaysInBetweenCalculator.Tests\DaysInBetweenCalculator.Tests.csproj", "{3C3475ED-ED27-4159-B3CE-1778FFA5F446}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{EFD5016A-1E17-4C42-A487-603F3517D40C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFD5016A-1E17-4C42-A487-603F3517D40C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFD5016A-1E17-4C42-A487-603F3517D40C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C3475ED-ED27-4159-B3CE-1778FFA5F446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C3475ED-ED27-4159-B3CE-1778FFA5F446}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C3475ED-ED27-4159-B3CE-1778FFA5F446}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3475ED-ED27-4159-B3CE-1778FFA5F446}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
