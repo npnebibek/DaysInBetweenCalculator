@@ -41,11 +41,6 @@ namespace DaysInBetweenCalculator.Implementation
         /// <returns></returns>
         public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, HolidayRules holidays)
         {
-            //var publicHolidayDates = GetHolidayDatesInRange(firstDate, 
-            //                                                secondDate, 
-            //                                                holidays.PublicHolidays
-            //                                                );
-
             var publicHolidayDates = holidays.PublicHolidays.Select(ph => ph.HolidayDate)
                                                             .ToList();
             
@@ -154,39 +149,6 @@ namespace DaysInBetweenCalculator.Implementation
 
             return numberOfDays;
         }
-
-        /// <summary>
-        /// Get a list of applicable dates in range of input dates
-        /// </summary>
-        /// <param name="firstDate"></param>
-        /// <param name="secondDate"></param>
-        /// <param name="publicHolidays"></param>
-        /// <returns></returns>
-        private static IList<DateTime> GetHolidayDatesInRange(DateTime firstDate,
-                                                              DateTime secondDate,
-                                                              IList<Holiday> publicHolidays,
-                                                              bool includeStateHoliday = false
-                                                              )
-        {
-            var datesInRange = new List<DateTime>();
-
-            if(!includeStateHoliday)
-            {
-                publicHolidays = publicHolidays.Where(ph => !ph.StateHoliday).ToList();
-            }
-
-            foreach (var holiday in publicHolidays)
-            {
-                if (holiday.HolidayDate.Date >= firstDate && holiday.HolidayDate.Date <= secondDate)
-                {
-                    datesInRange.Add(holiday.HolidayDate);
-                }
-            }
-
-
-            return datesInRange;
-        }
-
         #endregion
     }
 }

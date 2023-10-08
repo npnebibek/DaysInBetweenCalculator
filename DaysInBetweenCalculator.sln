@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaysInBetweenCaculator", "DaysInBetweenCalculator\DaysInBetweenCaculator.csproj", "{EFD5016A-1E17-4C42-A487-603F3517D40C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaysInBetweenCalculator.Test", "DaysInBetweenCalculator.Test\DaysInBetweenCalculator.Test.csproj", "{F6446B13-ED1D-4222-92CC-98BEB932E5FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EFD5016A-1E17-4C42-A487-603F3517D40C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFD5016A-1E17-4C42-A487-603F3517D40C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFD5016A-1E17-4C42-A487-603F3517D40C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6446B13-ED1D-4222-92CC-98BEB932E5FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

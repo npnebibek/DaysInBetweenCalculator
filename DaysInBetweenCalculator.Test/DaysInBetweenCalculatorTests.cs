@@ -10,13 +10,13 @@ namespace DaysInBetweenCalculator.Tests
     public class DaysInBetweenCalculatorTests
     {
         private readonly IDaysInBetweenCalculator _calculator;
-        public DaysInBetweenCalculatorTests(IDaysInBetweenCalculator calculator)
+        public DaysInBetweenCalculatorTests()
         {
-            _calculator = calculator;
+            _calculator = new Implementation.DaysInBetweenCalculator();
         }
 
         [Fact]
-        public void TestSameFirstAndSecondDate()
+        public void Given_SameFirstAndSecondDate_ShouldReturnZero()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 10);
@@ -27,7 +27,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void TestNoDaysInBetweenFirstAndSecondDate()
+        public void Given_NoDaysInBetweenFirstAndSecondDate_ShouldReturnZero()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 11);
@@ -38,7 +38,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void TestSmallSecondDateThanFirstDate()
+        public void Given_SmallSecondDateThanFirstDate_ShouldReturnZero()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 5);
@@ -49,7 +49,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void TestNumberOfWeekdays()
+        public void Given_ValidFirstAndSecondDate_ShoudReturnNumberOfWeekdays()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 20);
@@ -60,7 +60,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void TestNumberOfBusinessDaysWithNoPublicHolidays()
+        public void GivenNumberOfBusinessDaysWithNoPublicHolidays()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 22);
