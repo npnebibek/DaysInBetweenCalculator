@@ -41,8 +41,18 @@ namespace DaysInBetweenCalculator.Implementation
         /// <returns></returns>
         public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, HolidayRules holidays)
         {
-            var publicHolidayDates = GetHolidayDatesInRange(firstDate, secondDate, holidays.PublicHolidays);
-            var numberOfBusinessDays = CalculateDays(firstDate, secondDate, publicHolidayDates, calculateDaysInLieu: holidays.CalculateDayInLieu);
+            //var publicHolidayDates = GetHolidayDatesInRange(firstDate, 
+            //                                                secondDate, 
+            //                                                holidays.PublicHolidays
+            //                                                );
+
+            var publicHolidayDates = holidays.PublicHolidays.Select(ph => ph.HolidayDate)
+                                                            .ToList();
+            
+            var numberOfBusinessDays = CalculateDays(firstDate, 
+                                                     secondDate, 
+                                                     publicHolidayDates, 
+                                                     calculateDaysInLieu: holidays.CalculateDayInLieu);
             return numberOfBusinessDays;
         }
         #endregion
@@ -78,7 +88,7 @@ namespace DaysInBetweenCalculator.Implementation
         }
 
         /// <summary>
-        /// Check if date is public holiday
+        /// Check is public holiday?
         /// </summary>
         /// <param name="currentDate"></param>
         /// <param name="publicHolidays"></param>
@@ -150,13 +160,30 @@ namespace DaysInBetweenCalculator.Implementation
         /// </summary>
         /// <param name="firstDate"></param>
         /// <param name="secondDate"></param>
-        /// <param name="publicHolidayDates"></param>
+        /// <param name="publicHolidays"></param>
         /// <returns></returns>
-        private IList<DateTime> GetHolidayDatesInRange(DateTime firstDate, 
-                                                       DateTime secondDate, 
-                                                       IList<Holiday> publicHolidayDates)
+        private static IList<DateTime> GetHolidayDatesInRange(DateTime firstDate,
+                                                              DateTime secondDate,
+                                                              IList<Holiday> publicHolidays,
+                                                              bool includeStateHoliday = false
+                                                              )
         {
             var datesInRange = new List<DateTime>();
+
+            if(!includeStateHoliday)
+            {
+                publicHolidays = publicHolidays.Where(ph => !ph.StateHoliday).ToList();
+            }
+
+            foreach (var holiday in publicHolidays)
+            {
+                if (holiday.HolidayDate.Date >= firstDate && holiday.HolidayDate.Date <= secondDate)
+                {
+                    datesInRange.Add(holiday.HolidayDate);
+                }
+            }
+
+
             return datesInRange;
         }
 
