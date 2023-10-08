@@ -1,4 +1,5 @@
-﻿using DaysInBetweenCalculator.Helpers;
+﻿using DaysInBetweenCaculator.Helpers;
+using DaysInBetweenCalculator.Helpers;
 
 namespace DaysInBetweenCalculator.Interface
 {
@@ -6,6 +7,6 @@ namespace DaysInBetweenCalculator.Interface
     {
         int WeekdaysBetweenTwoDates(DateTime firstDate, DateTime secondDate);
         int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays);
-        int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, HolidayRules holidays);
+        int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<IHoliday> publicHolidays);
     }
 }
