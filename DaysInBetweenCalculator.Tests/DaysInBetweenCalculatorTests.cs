@@ -3,6 +3,7 @@
 using Xunit;
 using FluentAssertions;
 using DaysInBetweenCalculator.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DaysInBetweenCalculator.Tests
 {
@@ -12,7 +13,8 @@ namespace DaysInBetweenCalculator.Tests
         private readonly IDaysInBetweenCalculator _calculator;
         public DaysInBetweenCalculatorTests()
         {
-            _calculator = new Implementation.DaysInBetweenCalculator();
+            var serviceProvider = Startup.ConfigureServices();
+            _calculator = serviceProvider.GetRequiredService<IDaysInBetweenCalculator>();
         }
 
         [Fact]
