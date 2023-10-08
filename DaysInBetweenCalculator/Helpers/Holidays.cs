@@ -2,7 +2,7 @@
 {
     public class HolidayRules
     {
-        public IList<Holiday> PublicHolidays { get; set; } = new List<Holiday>();
+        public List<Holiday> PublicHolidays { get; set; } = new List<Holiday>();
         public bool CalculateDayInLieu { get; set; }
     }
 

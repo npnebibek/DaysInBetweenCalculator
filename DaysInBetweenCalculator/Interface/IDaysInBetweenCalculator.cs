@@ -2,7 +2,7 @@
 
 namespace DaysInBetweenCalculator.Interface
 {
-    internal interface IDaysInBetweenCalculator
+    public interface IDaysInBetweenCalculator
     {
         int WeekdaysBetweenTwoDates(DateTime firstDate, DateTime secondDate);
         int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays);
