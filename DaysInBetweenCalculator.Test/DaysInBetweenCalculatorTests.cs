@@ -60,7 +60,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void GivenNumberOfBusinessDaysWithNoPublicHolidays()
+        public void Given_NumberOfBusinessDaysWithNoPublicHolidays_ShouldReturnNumberOfBusinessDays()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 22);
@@ -72,7 +72,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void TestNumberOfBusinessDaysWithPublicHolidays()
+        public void Given_NumberOfBusinessDaysWithPublicHolidays_ShouldReturnNumberOfBusinessDays()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 22);
@@ -87,7 +87,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void TestNumberOfBusinessDaysWithHolidayRulesAndNoDaysInLieu()
+        public void Given_BusinessDaysWithHolidayRulesAndNoDaysInLieu_ShouldReturnNumberOfBusinessDays()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 22);
@@ -120,7 +120,7 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void TestNumberOfBusinessDaysWithHolidayRulesAndDaysInLieu()
+        public void Given_NumberOfBusinessDaysWithHolidayRulesAndDaysInLieu_ShouldReturnNumberOfBusinessDays()
         {
             var firstDate = new DateTime(2023, 10, 10);
             var secondDate = new DateTime(2023, 10, 22);
