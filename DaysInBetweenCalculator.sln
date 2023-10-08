@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaysInBetweenCaculator", "DaysInBetweenCalculator\DaysInBetweenCaculator.csproj", "{EFD5016A-1E17-4C42-A487-603F3517D40C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaysInBetweenCalculator.Test", "DaysInBetweenCalculator.Test\DaysInBetweenCalculator.Test.csproj", "{F6446B13-ED1D-4222-92CC-98BEB932E5FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DaysInBetweenCalculator.Tests", "DaysInBetweenCalculator.Test\DaysInBetweenCalculator.Tests.csproj", "{F6446B13-ED1D-4222-92CC-98BEB932E5FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
