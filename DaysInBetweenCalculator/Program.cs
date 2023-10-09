@@ -1,4 +1,5 @@
-﻿using DaysInBetweenCalculator.Helpers;
+﻿using DaysInBetweenCaculator.Helpers;
+using DaysInBetweenCalculator.Helpers;
 
 namespace DaysInBetweenCalculator
 {
@@ -11,40 +12,23 @@ namespace DaysInBetweenCalculator
             DateTime startDate = new(2023, 12, 20);
             DateTime endDate = new(2024, 01, 02);
 
+            //DateTime startDate = new(2023, 06, 1);
+            //DateTime endDate = new(2023, 07, 01);
+
             var publicHolidays = new List<DateTime>
             {
                 new(2023, 12, 25), new(2023, 12, 26), new(2023, 12, 31)
             };
 
-            var holiday1 = new Holiday
-            {
-                HolidayDate = new(2023, 12, 25),
-                Name = "Christmas Day",
-                StateHoliday = false,
-                Recurring = true,
-            };
-
-            var holiday2 = new Holiday
-            {
-                HolidayDate = new(2023, 12, 26),
-                Name = "Boxing Day",
-                StateHoliday = false,
-                Recurring = true,
-            };
+            var holiday1 = new HolidayRule("Christmas Day", HolidayType.FixedDate, 25, 12);
+            var holiday2 = new HolidayRule("Box Day", HolidayType.FixedDate, 26, 12);
+            var holiday3 = new HolidayRule("New Year's Eve", HolidayType.WeekendAdjusted, 31, 12);
+            var holiday4 = new HolidayRule("Queen's Birthday", 6, DayOfWeek.Monday, 2);
 
 
-            var holiday3 = new Holiday
+            var holidayRules = new List <HolidayRule>
             {
-                HolidayDate = new(2023, 12, 31),
-                Name = "New Year's Eve",
-                StateHoliday = true,
-                Recurring = true,
-            };
-
-            var holidayRules = new HolidayRules
-            {
-                PublicHolidays = new List<Holiday> { holiday1, holiday2, holiday3},
-                CalculateDayInLieu = true
+                holiday1, holiday2, holiday3, holiday4
             };
 
             var weekDays = calculator.WeekdaysBetweenTwoDates(startDate, endDate);

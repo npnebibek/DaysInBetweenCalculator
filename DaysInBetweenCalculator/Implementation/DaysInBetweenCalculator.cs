@@ -36,14 +36,14 @@ namespace DaysInBetweenCalculator.Implementation
         }
 
         /// <summary>
-        /// Calculate public holidays(PH) and day inlieu i.e if PH occurs on a weekend it gets transferred
+        /// Calculate public holidays(PH) for Fixed, WeekendAdjusted and NthDayOfTheWeek Holidays
         /// to the subsequent weekday
         /// </summary>
         /// <param name="firstDate"></param>
         /// <param name="secondDate"></param>
         /// <param name="holidays"></param>
         /// <returns></returns>
-        public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, HolidayRules holidays)
+        public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<HolidayRule> publicHolidays)
         {
             var publicHolidayDates = holidays.PublicHolidays.Select(ph => ph.HolidayDate)
                                                             .ToList();
@@ -134,6 +134,44 @@ namespace DaysInBetweenCalculator.Implementation
                 var isWeekday = IsWeekday(currentDate);
                 var isPublicHoliday = IsPublicHoliday(currentDate, publicHolidays);
 
+                if (isWeekday && !isPublicHoliday)
+                {
+                    numberOfDays++;
+                }
+
+
+                currentDate = currentDate.AddDays(1);
+            }
+
+            return numberOfDays;
+        }
+
+        /// <summary>
+        /// Calculate number of working days and complex public holidays types
+        /// </summary>
+        /// <param name="firstDate"></param>
+        /// <param name="secondDate"></param>
+        /// <param name="publicHolidays"></param>
+        /// <returns></returns>
+        private static int CalculateBusinessDays(DateTime firstDate,
+                                                 DateTime secondDate,
+                                                 IList<HolidayRule> publicHolidays)
+        {
+            var numberOfDays = 0;
+
+            if (!IsValidDateInputs(firstDate, secondDate))
+            {
+                return numberOfDays;
+            }
+
+            //We do not include the startDate and endDate
+            var currentDate = firstDate.AddDays(1);
+
+            while (currentDate < secondDate)
+            {
+                var isWeekday = IsWeekday(currentDate);
+                var isPublicHoliday = publicHolidays.Any(ph => ph.IsPublicHoliday(currentDate));
+
                 if (isWeekday)
                 {
                     if (!isPublicHoliday)
@@ -143,11 +181,12 @@ namespace DaysInBetweenCalculator.Implementation
                 }
                 else
                 {
-                    if (isPublicHoliday && calculateDaysInLieu)
+                    if (isPublicHoliday)
                     {
                         numberOfDays--;
                     }
                 }
+
                 currentDate = currentDate.AddDays(1);
             }
 
