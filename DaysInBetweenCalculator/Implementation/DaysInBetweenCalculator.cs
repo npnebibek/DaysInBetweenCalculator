@@ -37,7 +37,7 @@ namespace DaysInBetweenCalculator.Implementation
         }
 
         /// <summary>
-        /// Calculate public holidays(PH) and day inlieu i.e if PH occurs on a weekend it gets transferred
+        /// Calculate public holidays(PH) for Fixed, WeekendAdjusted and NthDayOfTheWeek Holidays
         /// to the subsequent weekday
         /// </summary>
         /// <param name="firstDate"></param>
