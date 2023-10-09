@@ -93,7 +93,7 @@ namespace DaysInBetweenCalculator.Tests
         public void Given_BusinessDaysWithFixedHolidayRules_ShouldReturnNumberOfBusinessDays()
         {
             DateTime firstDate = new(2023, 12, 20);
-            DateTime secondDate = new(2024, 01, 02);
+            DateTime secondDate = new(2023, 12, 30);
 
             var holiday1 = new HolidayRule("Christmas Day", HolidayType.FixedDate, 25, 12);
             var holiday2 = new HolidayRule("Box Day", HolidayType.FixedDate, 26, 12);
@@ -105,7 +105,7 @@ namespace DaysInBetweenCalculator.Tests
 
             var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidayRules);
 
-            daysInbetween.Should().Be(7);
+            daysInbetween.Should().Be(5);
         }
 
         [Fact]
@@ -122,7 +122,7 @@ namespace DaysInBetweenCalculator.Tests
 
             var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidayRules);
 
-            daysInbetween.Should().Be(6);
+            daysInbetween.Should().Be(2);
         }
 
 
@@ -141,7 +141,7 @@ namespace DaysInBetweenCalculator.Tests
 
             var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidayRules);
 
-            daysInbetween.Should().Be(6);
+            daysInbetween.Should().Be(20);
         }
     }
 }

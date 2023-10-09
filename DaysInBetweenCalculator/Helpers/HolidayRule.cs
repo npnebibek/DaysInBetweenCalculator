@@ -48,7 +48,7 @@ namespace DaysInBetweenCalculator.Helpers
                         if (dateToCheck.DayOfWeek == DayOfWeek)
                         {
                             occurence++;
-                            if (occurence == OccurrenceWeek)
+                            if (occurence == OccurrenceWeek && dateToCheck.Day == currentDate.Day)
                             {
                                 return true;
                             }
