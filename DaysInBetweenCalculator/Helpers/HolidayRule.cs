@@ -36,24 +36,11 @@ namespace DaysInBetweenCalculator.Helpers
             switch(Type)
             {
                 case HolidayType.FixedDate:
+                case HolidayType.WeekendAdjusted:
                     return currentDate.Day == Day && currentDate.Month == Month;
 
-                case HolidayType.WeekendAdjusted:
-                    var holidayDate = new DateTime(currentYear, Month, Day);
-
-                    if(holidayDate.DayOfWeek == System.DayOfWeek.Saturday)
-                    {
-                        return holidayDate.AddDays(2).Date == currentDate;
-                    }
-
-                    if(holidayDate.DayOfWeek == System.DayOfWeek.Sunday)
-                    {
-                        return holidayDate.AddDays(1).Date == currentDate;
-                    }
-                    return false;
-
                 case HolidayType.NthDayOfMonth:
-                    var firstDateOfMonth = new DateTime(currentYear, Month, 1);
+                    var firstDateOfMonth = new DateTime(currentYear, currentDate.Month, 1);
                     var occurence = 0;
 
                     for(var dateToCheck = firstDateOfMonth; dateToCheck.Month == Month; dateToCheck = dateToCheck.AddDays(1))

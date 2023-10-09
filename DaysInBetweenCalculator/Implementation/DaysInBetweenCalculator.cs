@@ -126,6 +126,7 @@ namespace DaysInBetweenCalculator.Implementation
                     numberOfDays++;
                 }
 
+
                 currentDate = currentDate.AddDays(1);
             }
 
@@ -158,10 +159,19 @@ namespace DaysInBetweenCalculator.Implementation
                 var isWeekday = IsWeekday(currentDate);
                 var isPublicHoliday = publicHolidays.Any(ph => ph.IsPublicHoliday(currentDate));
 
-                if (isWeekday && !isPublicHoliday)
+                if (isWeekday)
                 {
-
-                    numberOfDays++;
+                    if (!isPublicHoliday)
+                    {
+                        numberOfDays++;
+                    }
+                }
+                else
+                {
+                    if (isPublicHoliday)
+                    {
+                        numberOfDays--;
+                    }
                 }
 
                 currentDate = currentDate.AddDays(1);
