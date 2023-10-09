@@ -14,8 +14,9 @@ namespace DaysInBetweenCalculator.Implementation
         /// <returns></returns>
         public int WeekdaysBetweenTwoDates(DateTime firstDate, DateTime secondDate)
         {
-            var numberOfWeekdays = CalculateBusinessDays(firstDate, 
-                                                         secondDate);
+            var numberOfWeekdays = CalculateBusinessDays(firstDate,
+                                                         secondDate,
+                                                         publicHolidays: new List<DateTime>());
             return numberOfWeekdays;
         }
 
@@ -28,10 +29,9 @@ namespace DaysInBetweenCalculator.Implementation
         /// <returns></returns>
         public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays)
         {
-            var numberOfBusinessDays = CalculateBusinessDays(firstDate, 
-                                                             secondDate, 
-                                                             publicHolidays, 
-                                                             calculateDaysInLieu: false);
+            var numberOfBusinessDays = CalculateBusinessDays(firstDate,
+                                                             secondDate,
+                                                             publicHolidays);
             return numberOfBusinessDays;
         }
 
@@ -89,17 +89,11 @@ namespace DaysInBetweenCalculator.Implementation
         /// <param name="currentDate"></param>
         /// <param name="publicHolidays"></param>
         /// <returns></returns>
-        private static bool IsPublicHoliday(DateTime currentDate, IList<DateTime>? publicHolidays)
+        private static bool IsPublicHoliday(DateTime currentDate, IList<DateTime> publicHolidays)
         {
-            if (publicHolidays != null)
-            {
-                return publicHolidays.Any(holiday => holiday.Date == currentDate.Date);
-            }
-            else
-            {
-                return false;
 
-            }
+            return publicHolidays.Any(holiday => holiday.Date == currentDate.Date);
+
         }
 
         /// <summary>
@@ -109,12 +103,10 @@ namespace DaysInBetweenCalculator.Implementation
         /// <param name="firstDate"></param>
         /// <param name="secondDate"></param>
         /// <param name="publicHolidays"></param>
-        /// <param name="calculateDaysInLieu"></param>
         /// <returns></returns>
         private static int CalculateBusinessDays(DateTime firstDate,
                                                  DateTime secondDate,
-                                                 IList<DateTime>? publicHolidays = null,
-                                                 bool calculateDaysInLieu = false)
+                                                 IList<DateTime> publicHolidays)
         {
             var numberOfDays = 0;
 
@@ -144,7 +136,7 @@ namespace DaysInBetweenCalculator.Implementation
         }
 
         /// <summary>
-        /// Calculate number of working days and complex public holidays types
+        /// Calculate number of working days and complex public holidays rules
         /// </summary>
         /// <param name="firstDate"></param>
         /// <param name="secondDate"></param>

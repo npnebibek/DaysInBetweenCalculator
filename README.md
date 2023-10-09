@@ -113,19 +113,17 @@ Validates the entered date values to ensure `firstDate` is before `secondDate`. 
 
 Checks if a given date falls on a weekday (Monday through Friday).
 
-### `private static bool IsPublicHoliday(DateTime currentDate, IList<DateTime>? publicHolidays)`
+### `private static bool IsPublicHoliday(DateTime currentDate, IList<DateTime> publicHolidays)`
 
 Checks if a given date is a public holiday based on the provided list of public holidays.
 
-### `private static int CalculateBusinessDays(DateTime firstDate, DateTime secondDate, IList<DateTime>? publicHolidays = null, bool calculateDaysInLieu = false)`
+### `private static int CalculateBusinessDays(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays)`
 
-Calculates the number of business days between two dates considering public holidays and optional day-in-lieu calculations.
+Calculates the number of business days between two dates considering public holidays.
 
--   `firstDate`: The start date.
--   `secondDate`: The end date.
--   `publicHolidays`: List of public holidays to consider.
--   `calculateDaysInLieu`: Indicates whether to calculate day-in-lieu.
--   Returns the number of business days between the two dates.
+### `private static int CalculateBusinessDays(DateTime firstDate, DateTime secondDate, IList<HolidayRule> publicHolidays)`
+
+Calculates the number of business days between two dates considering public holidays with complex rules extended by HolidayRule.
 
 ## Usage
 
@@ -133,7 +131,7 @@ You can use the `DaysInBetweenCalculator` class to calculate weekdays, business 
 
 Example:
 
-````csharp
+```csharp
  public static class Program
     {
         static void Main(string[] args)
@@ -175,5 +173,4 @@ Example:
 
         }
     }
-            ```
-````
+```
