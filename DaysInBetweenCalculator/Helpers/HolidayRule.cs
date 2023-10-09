@@ -20,11 +20,10 @@ namespace DaysInBetweenCalculator.Helpers
             Month = month;
         }
 
-        public HolidayRule(string? name, int day, int month, DayOfWeek? dayOfWeek, int occurenceWeek)
+        public HolidayRule(string? name, int month, DayOfWeek? dayOfWeek, int occurenceWeek)
         {
             Name = name;
             Type = HolidayType.NthDayOfMonth;
-            Day = day;
             Month = month;
             DayOfWeek = dayOfWeek;
             OccurrenceWeek = occurenceWeek;
