@@ -1,6 +1,6 @@
 # DaysInBetweenCalculator
 
-The `DaysInBetweenCalculator` class is a utility for calculating the number of weekdays and business days between two given dates, considering public holidays and optional day-in-lieu calculations.
+The `DaysInBetweenCalculator` class is a utility for calculating the number of weekdays and business days between two given dates, considering public holidays like Fixed, WeekendAdjusted and NthDayofMonth holidays.
 
 ## Public Methods
 
@@ -18,19 +18,41 @@ Calculates the number of business days (weekdays excluding public holidays) betw
 
 -   `firstDate`: The start date.
 -   `secondDate`: The end date.
--   `publicHolidays`: List of public holidays to consider.
+-   `publicHolidays`: List of public holidays to considerof type DateTime.
 -   Returns the number of business days between the two dates.
 
 ### `int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<HolidayRule> publicHolidays)`
 
-Calculates the number of business days for a List of HolidayRules public holidays Fixed, WeekendAdjusted and NthDayOfTheMonth Types
+Calculates the number of business days for a List of HolidayRules holidays Fixed, WeekendAdjusted and NthDayOfTheMonth Types
 
 -   `firstDate`: The start date.
 -   `secondDate`: The end date.
--   `holidays`: Holiday rules specifying public holidays, recurring holiday rules, state only rules and day-in-lieu calculations.
+-   `publicholidays`: Holiday rules specifying public holidays of type HolidayRule for Fixed, WeekendAdjusted and NthDayOfTheMonth Holiday
 -   Returns the number of business days between the two dates.
 
-### `Holiday Rule Class`
+## Private Methods
+
+### `private static bool IsValidDateInputs(DateTime firstDate, DateTime secondDate)`
+
+Validates the entered date values to ensure `firstDate` is before `secondDate`. In this case if they are equal returns false.
+
+### `private static bool IsWeekday(DateTime currentDate)`
+
+Checks if a given date falls on a weekday (Monday through Friday).
+
+### `private static bool IsPublicHoliday(DateTime currentDate, IList<DateTime> publicHolidays)`
+
+Checks if a given date is a public holiday based on the provided list of public holidays.
+
+### `private static int CalculateBusinessDays(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays)`
+
+Calculates the number of business days between two dates considering public holidays.
+
+### `private static int CalculateBusinessDays(DateTime firstDate, DateTime secondDate, IList<HolidayRule> publicHolidays)`
+
+Calculates the number of business days between two dates considering public holidays with complex rules extended by HolidayRule.
+
+### `Holiday Rule Class Implementation`
 
 ```csharp
 using DaysInBetweenCaculator.Helpers;
@@ -102,28 +124,6 @@ namespace DaysInBetweenCalculator.Helpers
 ```
 
 The HolidayRules class is used to configure holiday rules for Fixed, WeekendAdjusted and NthDayofMonth Holiday. Holiday class can further be configured or extended as per use case.
-
-## Private Methods
-
-### `private static bool IsValidDateInputs(DateTime firstDate, DateTime secondDate)`
-
-Validates the entered date values to ensure `firstDate` is before `secondDate`. In this case if they are equal returns false.
-
-### `private static bool IsWeekday(DateTime currentDate)`
-
-Checks if a given date falls on a weekday (Monday through Friday).
-
-### `private static bool IsPublicHoliday(DateTime currentDate, IList<DateTime> publicHolidays)`
-
-Checks if a given date is a public holiday based on the provided list of public holidays.
-
-### `private static int CalculateBusinessDays(DateTime firstDate, DateTime secondDate, IList<DateTime> publicHolidays)`
-
-Calculates the number of business days between two dates considering public holidays.
-
-### `private static int CalculateBusinessDays(DateTime firstDate, DateTime secondDate, IList<HolidayRule> publicHolidays)`
-
-Calculates the number of business days between two dates considering public holidays with complex rules extended by HolidayRule.
 
 ## Usage
 
