@@ -20,10 +20,10 @@ namespace DaysInBetweenCalculator.Helpers
             Month = month;
         }
 
-        public HolidayRule(string? name, HolidayType holidayType, int day, int month, DayOfWeek? dayOfWeek, int occurenceWeek)
+        public HolidayRule(string? name, int day, int month, DayOfWeek? dayOfWeek, int occurenceWeek)
         {
             Name = name;
-            Type = holidayType;
+            Type = HolidayType.NthDayOfMonth;
             Day = day;
             Month = month;
             DayOfWeek = dayOfWeek;
@@ -55,14 +55,14 @@ namespace DaysInBetweenCalculator.Helpers
 
                 case HolidayType.NthDayOfMonth:
                     var firstDateOfMonth = new DateTime(currentYear, Month, 1);
-                    var dayCount = 0;
+                    var occurence = 0;
 
                     for(var dateToCheck = firstDateOfMonth; dateToCheck.Month == Month; dateToCheck = dateToCheck.AddDays(1))
                     {
                         if (dateToCheck.DayOfWeek == DayOfWeek)
                         {
-                            dayCount++;
-                            if (dayCount == OccurrenceWeek)
+                            occurence++;
+                            if (occurence == OccurrenceWeek)
                             {
                                 return true;
                             }
