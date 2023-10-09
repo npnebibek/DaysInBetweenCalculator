@@ -4,6 +4,7 @@ using Xunit;
 using FluentAssertions;
 using DaysInBetweenCalculator.Helpers;
 using Microsoft.Extensions.DependencyInjection;
+using DaysInBetweenCaculator.Helpers;
 
 namespace DaysInBetweenCalculator.Tests
 {
@@ -89,67 +90,56 @@ namespace DaysInBetweenCalculator.Tests
         }
 
         [Fact]
-        public void Given_BusinessDaysWithHolidayRulesAndNoDaysInLieu_ShouldReturnNumberOfBusinessDays()
+        public void Given_BusinessDaysWithFixedHolidayRules_ShouldReturnNumberOfBusinessDays()
         {
-            var firstDate = new DateTime(2023, 10, 10);
-            var secondDate = new DateTime(2023, 10, 22);
+            DateTime firstDate = new(2023, 12, 20);
+            DateTime secondDate = new(2024, 01, 02);
 
-            var holiday1 = new Holiday
+            var holiday1 = new HolidayRule("Christmas Day", HolidayType.FixedDate, 25, 12);
+            var holiday2 = new HolidayRule("Box Day", HolidayType.FixedDate, 26, 12);
+
+            var holidayRules = new List<HolidayRule>
             {
-                Name = "Holiday1",
-                Recurring = true,
-                HolidayDate = new(2023, 10, 13),
-                StateHoliday = false,
+                holiday1, holiday2
             };
 
-            var holiday2 = new Holiday
-            {
-                Name = "Holiday1",
-                Recurring = true,
-                HolidayDate = new(2023, 10, 14),
-                StateHoliday = false,
-            };
-
-            var holidays = new HolidayRules
-            {
-                PublicHolidays = new List<Holiday> { holiday1, holiday2 },
-                CalculateDayInLieu = false
-            };
-
-            var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidays);
+            var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidayRules);
 
             daysInbetween.Should().Be(7);
         }
 
         [Fact]
-        public void Given_NumberOfBusinessDaysWithHolidayRulesAndDaysInLieu_ShouldReturnNumberOfBusinessDays()
+        public void Given_NumberOfBusinessDaysWithWeekendAdjustedHolidayRules_ShouldReturnNumberOfBusinessDays()
         {
-            var firstDate = new DateTime(2023, 10, 10);
-            var secondDate = new DateTime(2023, 10, 22);
+            var firstDate = new DateTime(2023, 12, 27);
+            var secondDate = new DateTime(2024, 01, 02);
 
-            var holiday1 = new Holiday
+            var holiday1 = new HolidayRule("New Year's Eve", HolidayType.WeekendAdjusted, 31, 12);
+            var holidayRules = new List<HolidayRule>
             {
-                Name = "Holiday1",
-                Recurring = true,
-                HolidayDate = new(2023, 10, 13),
-                StateHoliday = false,
+                holiday1
             };
 
-            var holiday2 = new Holiday
+            var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidayRules);
+
+            daysInbetween.Should().Be(6);
+        }
+
+
+        [Fact]
+        public void Given_NumberOfBusinessDaysWithNthDayHolidayRule_ShouldReturnNumberOfBusinessDays()
+        {
+            var firstDate = new DateTime(2023, 06, 1);
+            var secondDate = new DateTime(2023, 07, 1);
+
+            var holiday1 = new HolidayRule("Queen's Birthday", 6, DayOfWeek.Monday, 2);
+
+            var holidayRules = new List<HolidayRule>
             {
-                Name = "Holiday1",
-                Recurring = true,
-                HolidayDate = new(2023, 10, 14),
-                StateHoliday = false,
+                holiday1
             };
 
-            var holidays = new HolidayRules
-            {
-                PublicHolidays = new List<Holiday> { holiday1, holiday2 },
-                CalculateDayInLieu = true
-            };
-
-            var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidays);
+            var daysInbetween = _calculator.BusinessDaysBetweenTwoDates(firstDate, secondDate, holidayRules);
 
             daysInbetween.Should().Be(6);
         }
