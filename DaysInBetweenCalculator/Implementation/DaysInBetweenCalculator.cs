@@ -36,7 +36,7 @@ namespace DaysInBetweenCalculator.Implementation
         }
 
         /// <summary>
-        /// Calculate public holidays(PH) for Fixed, WeekendAdjusted and NthDayOfTheWeek Holidays
+        /// Calculate public holidays for Fixed, WeekendAdjusted and NthDayOfTheWeek Holidays
         /// to the subsequent weekday
         /// </summary>
         /// <param name="firstDate"></param>

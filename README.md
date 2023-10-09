@@ -21,36 +21,87 @@ Calculates the number of business days (weekdays excluding public holidays) betw
 -   `publicHolidays`: List of public holidays to consider.
 -   Returns the number of business days between the two dates.
 
-### `int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, HolidayRules holidays)`
+### `int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<HolidayRule> publicHolidays)`
 
-Calculates the number of business days considering public holidays and optional day-in-lieu calculations.
+Calculates the number of business days for a List of HolidayRules public holidays Fixed, WeekendAdjusted and NthDayOfTheMonth Types
 
 -   `firstDate`: The start date.
 -   `secondDate`: The end date.
 -   `holidays`: Holiday rules specifying public holidays, recurring holiday rules, state only rules and day-in-lieu calculations.
 -   Returns the number of business days between the two dates.
 
+### `Holiday Rule Clas`
+
 ```csharp
+using DaysInBetweenCaculator.Helpers;
+
 namespace DaysInBetweenCalculator.Helpers
 {
-    public class HolidayRules
+    public class HolidayRule
     {
-        public List<Holiday> PublicHolidays { get; set; } = new List<Holiday>();
-        public bool CalculateDayInLieu { get; set; }
-    }
-
-    public class Holiday
-    {
-        public DateTime HolidayDate { get; set; }
         public string? Name { get; set; }
-        public bool Recurring { get; set; }
-        public bool StateHoliday { get; set; }
-        public string? State { get; set; }
+        public HolidayType Type { get; set; }
+        public int Day { get; set; }
+        public int Month { get; set; }
+        public DayOfWeek? DayOfWeek { get; set; }
+        public int OccurrenceWeek { get; set; }
+
+
+        public HolidayRule(string? name, HolidayType holidayType, int day, int month)
+        {
+            Name = name;
+            Type = holidayType;
+            Day = day;
+            Month = month;
+        }
+
+        public HolidayRule(string? name, int month, DayOfWeek? dayOfWeek, int occurenceWeek)
+        {
+            Name = name;
+            Type = HolidayType.NthDayOfMonth;
+            Month = month;
+            DayOfWeek = dayOfWeek;
+            OccurrenceWeek = occurenceWeek;
+        }
+
+        public bool IsPublicHoliday(DateTime currentDate)
+        {
+            var currentYear = currentDate.Year;
+
+            switch(Type)
+            {
+                case HolidayType.FixedDate:
+                case HolidayType.WeekendAdjusted:
+                    return currentDate.Day == Day && currentDate.Month == Month;
+
+                case HolidayType.NthDayOfMonth:
+                    var firstDateOfMonth = new DateTime(currentYear, currentDate.Month, 1);
+                    var occurence = 0;
+
+                    for(var dateToCheck = firstDateOfMonth; dateToCheck.Month == Month; dateToCheck = dateToCheck.AddDays(1))
+                    {
+                        if (dateToCheck.DayOfWeek == DayOfWeek)
+                        {
+                            occurence++;
+                            if (occurence == OccurrenceWeek && dateToCheck.Day == currentDate.Day)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+
+                default:
+                    return false;
+
+            }
+        }
     }
 }
+
 ```
 
-The HolidayRules class is used to configure holiday rules, taking into account public holidays and optional day-in-lieu calculations. Holiday class can further be configured or extended as per use case.
+The HolidayRules class is used to configure holiday rules for Fixed, WeekendAdjusted and NthDayofMonth Holiday. Holiday class can further be configured or extended as per use case.
 
 ## Private Methods
 
@@ -82,45 +133,33 @@ You can use the `DaysInBetweenCalculator` class to calculate weekdays, business 
 
 Example:
 
-```csharp
+````csharp
+ public static class Program
+    {
+        static void Main(string[] args)
+        {
+            var calculator = new Implementation.DaysInBetweenCalculator();
 
             DateTime startDate = new(2023, 12, 20);
             DateTime endDate = new(2024, 01, 02);
+
+            //DateTime startDate = new(2023, 06, 1);
+            //DateTime endDate = new(2023, 07, 01);
 
             var publicHolidays = new List<DateTime>
             {
                 new(2023, 12, 25), new(2023, 12, 26), new(2023, 12, 31)
             };
 
-            var holiday1 = new Holiday
-            {
-                HolidayDate = new(2023, 12, 25),
-                Name = "Christmas Day",
-                StateHoliday = false,
-                Recurring = true,
-            };
-
-            var holiday2 = new Holiday
-            {
-                HolidayDate = new(2023, 12, 26),
-                Name = "Boxing Day",
-                StateHoliday = false,
-                Recurring = true,
-            };
+            var holiday1 = new HolidayRule("Christmas Day", HolidayType.FixedDate, 25, 12);
+            var holiday2 = new HolidayRule("Box Day", HolidayType.FixedDate, 26, 12);
+            var holiday3 = new HolidayRule("New Year's Eve", HolidayType.WeekendAdjusted, 31, 12);
+            var holiday4 = new HolidayRule("Queen's Birthday", 6, DayOfWeek.Monday, 2);
 
 
-            var holiday3 = new Holiday
+            var holidayRules = new List <HolidayRule>
             {
-                HolidayDate = new(2023, 12, 31),
-                Name = "New Year's Eve",
-                StateHoliday = true,
-                Recurring = true,
-            };
-
-            var holidayRules = new HolidayRules
-            {
-                PublicHolidays = new List<Holiday> { holiday1, holiday2, holiday3},
-                CalculateDayInLieu = true
+                holiday1, holiday2, holiday3, holiday4
             };
 
             var weekDays = calculator.WeekdaysBetweenTwoDates(startDate, endDate);
@@ -132,5 +171,9 @@ Example:
 
             Console.WriteLine($"Week Days: {weekDays}");
             Console.WriteLine($"Business Days: {businessDays}");
-            Console.WriteLine($"Business Days with Lieu: {businessDaysWithLieu}");
-```
+            Console.WriteLine($"Business Days with Holiday Rules: {businessDaysWithLieu}");
+
+        }
+    }
+            ```
+````
