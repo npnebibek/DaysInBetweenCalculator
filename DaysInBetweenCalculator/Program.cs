@@ -40,7 +40,7 @@ namespace DaysInBetweenCalculator
 
             Console.WriteLine($"Week Days: {weekDays}");
             Console.WriteLine($"Business Days: {businessDays}");
-            Console.WriteLine($"Business Days with Lieu: {businessDaysWithLieu}");
+            Console.WriteLine($"Business Days with Holiday Rules: {businessDaysWithLieu}");
 
         }
     }

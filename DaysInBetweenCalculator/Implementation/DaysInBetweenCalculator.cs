@@ -45,13 +45,10 @@ namespace DaysInBetweenCalculator.Implementation
         /// <returns></returns>
         public int BusinessDaysBetweenTwoDates(DateTime firstDate, DateTime secondDate, IList<HolidayRule> publicHolidays)
         {
-            var publicHolidayDates = holidays.PublicHolidays.Select(ph => ph.HolidayDate)
-                                                            .ToList();
-            
-            var numberOfBusinessDays = CalculateBusinessDays(firstDate, 
-                                                             secondDate, 
-                                                             publicHolidayDates, 
-                                                             calculateDaysInLieu: holidays.CalculateDayInLieu);
+
+            var numberOfBusinessDays = CalculateBusinessDays(firstDate,
+                                                             secondDate,
+                                                             publicHolidays);
             return numberOfBusinessDays;
         }
         #endregion
